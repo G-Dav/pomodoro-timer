@@ -1,44 +1,56 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="description" content="Pomodoro timer">
         <meta name="keywords" content="Pomodoro, timer, session">
         <title>Pomodoro Timer</title>
         <link rel="shortcut icon" href="img/Recurso1.png" type="image/gif" />
+        <link rel="stylesheet" href="./css/bootstrap.min.css">
+		<link rel="stylesheet" href="./css/main.css">
+        <link rel="stylesheet" href="estilo.css" />
     </head>
     <body>
-        <div>
-            <div>
-                <img src="img/Recurso1.png">
-                <h1>Pomodoro Timer</h1>
-                <a href=#>Pomodoro technique</a>
-                <button>EN</button>
-            </div>
-            <hr>
-            <div>
-                <div>
-                    <!--Tipos de intervalos-->
-                    <div>
-                        <button>Pomodoro</button>
-                        <button>Short break</button>
-                        <button>Long break</button>
+        <div class="container">
+            <div class="col-xs-12 col-sm-10 col-md-8 col-lg-8 col-sm-offset-1 col-md-offset-2 col-sm-offset-1" style="background-color:aquamarine;">
+                <header class="row">
+                    <div class="col-xs-8 col-sm-9 col-md-6" style="background-color: black;">
+                        <img src="img/Imagen2.png">
                     </div>
-                    <!--Gráfico-->
-                    <div>
-                        <div>
-                            <h1>25:00</h1>
+                    <div class="col-xs-4 col-sm-3 col-md-4 col-lg-3 col-md-offset-2 col-lg-offset-3" style="background-color:blue;">
+                        <div class="col-sm-12 col-md-6">
+                            <a href=#>Pomodoro technique</a>
                         </div>
-                        <div>
-                            <canvas></canvas>
+                        <div class="col-sm-12 col-md-6">
+                            <button>EN</button>
                         </div>
-                    </div>
+                    </div>   
+                </header>
+                <hr>
+                <div class="row">
+                        <!--Tsipos de intervalos-->
+                        <div class="col-lg-6">
+                            <button>Pomodoro</button>
+                            <button>Short break</button>
+                            <button>Long break</button>
+                        </div>
+                        <!--Gráfico-->
+                        <div class="col-lg-6">
+                            <div>
+                                <h1>25:00</h1>
+                            </div>
+                            <div>
+                                <canvas></canvas>
+                            </div>
+                        </div>
                 </div>
-                <div>
+                <div class="row">
                     <button>Start/Stop</button>
                     <button>Restart</button>
                     <button>Options</button>
                 </div>
             </div>
         </div>
+        <script src="js/bootstrap.min.js"></script>
     </body>
 </html>
