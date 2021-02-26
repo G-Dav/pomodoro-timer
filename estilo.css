@@ -1,8 +1,36 @@
 body{
-    background-color: #a23131;
+    background-color: #d15555;
     margin-top: 15px;
 }
 
 header img{
     max-width: 70%;
+}
+
+hr{
+    margin: 15px;
+    /*background-color: #eda489;*/
+    border-top: 1px dashed bisque;
+}
+
+.timer{
+    background-color: #eda489;
+    border-radius: 5px 5px;
+    padding: 10px;
+}
+
+.boton{
+    /*background-color: transparent;*/
+    /*color: white;*/
+    margin: 1px;
+}
+
+.sesion{
+    margin-top: 25px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.row.sesion button{
+    margin-bottom: 25px;
 }

@@ -11,53 +11,60 @@
         <link rel="stylesheet" href="estilo.css" />
     </head>
     <body>
-        <div class="container">
-            <div class="col-xs-12 col-sm-10 col-md-8 col-lg-8 col-sm-offset-1 col-md-offset-2 col-sm-offset-1" style="background-color:aquamarine;">
+        <div class="container" style="background-color: cadetblue;">
+            <div class="col-xs-12 col-sm-10 col-md-8 col-lg-8 col-sm-offset-1 col-md-offset-2 col-sm-offset-1" style="background-color: teal;">
                 <header class="row">
-                    <div class="col-xs-8 col-sm-9 col-md-6" style="background-color: black;">
-                        <img src="img/Imagen2.png">
+                    <div class="col-xs-8 col-sm-9 col-md-6">
+                        <img src="img/Imagen3.png">
                     </div>
-                    <div class="col-xs-4 col-sm-3 col-md-4 col-lg-3 col-md-offset-2 col-lg-offset-3" style="background-color:blue;">
-                        <div class="col-sm-12 col-md-6">
-                            <a href=#>Pomodoro technique</a>
-                        </div>
-                        <div class="col-sm-12 col-md-6">
-                            <button>EN</button>
-                        </div>
+                    <div class="col-xs-4 col-sm-3 col-md-4 col-lg-3 col-md-offset-2 col-lg-offset-3" style="background-color: coral;">
+                        <a href=#>Pomodoro technique</a>
                     </div>   
                 </header>
                 <hr>
-                <div class="row">
+                <div class="row timer">
                     <!--Tipos de intervalos-->
-                    <div class="col-sm-6" style="background-color: beige;">
-                        <div class="row">
-                            <button>Pomodoro</button>
+                    <div class="col-xs-12 col-sm-6" style="position:relative;background-color: blueviolet;">
+                        <div class="row sesion">
+                            <div class="col-xs-12 col-sm-12">
+                                <button class="btn boton btn-block">Pomodoro</button>
+                            </div>
+                            <div class="col-xs-6 col-sm-12">
+                                <button class="btn boton btn-block">Short break</button>
+                            </div>
+                            <div class="col-xs-6 col-sm-12">
+                                <button class="btn boton btn-block">Long break</button>
+                            </div>
                         </div>
-                        <div class="row">
-                            <button>Short break</button>
-                        </div>
-                        <div class="row">
-                            <button>Long break</button>
-                        </div>
-                        <div class="row">
-                            <button>Start/Stop</button>
-                            <button>Restart</button>
-                            <button>Options</button>
+                        <!--Botones para iniciar/detener sesión-->
+                        <div class="row" style="background-color: aqua;">
+                            <div class="col-xs-4">
+                                <button class="btn btn-block">Start</button>
+                            </div>
+                            <div class="col-xs-4">
+                                <button class="btn btn-block">Reset</button>
+                            </div>
+                            <div class="col-xs-4">
+                                <button class="btn btn-block">Options</button>
+                            </div>
                         </div>
                     </div>
                     <!--Gráfico-->
-                    <div class="col-sm-6" style="background-color: darkblue;">
+                    <div class="col-xs-12 col-sm-6" style="background-color: bisque;">
                         <div>
-                            <h1>25:00</h1>
+                            <center><h1>25:00</h1></center>
                         </div>
                         <div>
-                            <canvas></canvas>
+                            <center>
+                                <canvas style="background-color: blue;"></canvas>
+                            </center>
                         </div>
                     </div>
                 </div>
-                
+                <hr>
             </div>
         </div>
-        <script src="js/bootstrap.min.js"></script>
+        <script src="http://code.jquery.com/jquery.js"></script>
+    	<script src="js/bootstrap.min.js"></script>
     </body>
 </html>
