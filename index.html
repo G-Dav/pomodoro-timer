@@ -14,7 +14,7 @@
         <div class="container" style="background-color: cadetblue;">
             <div class="col-xs-12 col-sm-10 col-md-8 col-lg-8 col-sm-offset-1 col-md-offset-2 col-sm-offset-1" style="background-color: teal;">
                 <header class="row">
-                    <div class="col-xs-8 col-sm-9 col-md-6">
+                    <div class="col-xs-8 col-sm-9 col-md-6" style="background-color: cornflowerblue;">
                         <img src="img/Imagen3.png">
                     </div>
                     <div class="col-xs-4 col-sm-3 col-md-4 col-lg-3 col-md-offset-2 col-lg-offset-3" style="background-color: coral;">
@@ -45,7 +45,56 @@
                                 <button class="btn btn-block">Reset</button>
                             </div>
                             <div class="col-xs-4">
-                                <button class="btn btn-block">Options</button>
+                                <button class="btn btn-block" data-toggle="modal" data-target="#configuracion">Options</button>
+                            </div>
+                        </div>
+                        <!--Ventana Modal-->
+                        <div class="modal fade" id="configuracion" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title">Settings</h3>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <label>Time (minutes)</label>
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-xs-4" style="background-color: aqua;">
+                                                        Pomodoro
+                                                        <input type="number" min="0" value="25">
+                                                    </div>
+                                                    <div class="col-xs-4" style="background-color: darkblue;">
+                                                        Short break
+                                                        <input type="number" min="0" value="5">
+                                                    </div>
+                                                    <div class="col-xs-4" style="background-color: darkcyan;">
+                                                        Long break
+                                                        <input type="number" min="0" value="15">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            Auto start?
+                                            <input type="checkbox">
+                                            <hr>
+                                            Long break interval
+                                            <input type="number" min="0" value="4">
+                                            <hr>
+                                            Alarm
+                                            <input type="checkbox">                                       
+                                            <input type="range">
+                                            <hr>
+                                            
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

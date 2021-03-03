@@ -106,7 +106,7 @@ btndCorto.addEventListener('click', () => {
         cambioSesion(2, conf.dCorto.min)
     }
     else{
-        confirmacion = window.confirm("Are you sure you want to interrump the current session?")
+        confirmacion = window.confirm("Are you sure you want to interrupt the current session?")
         if(confirmacion){
             clearInterval(intervalo)
             cambioSesion(2, conf.dCorto.min)
@@ -120,7 +120,7 @@ btndLargo.addEventListener('click', () => {
         cambioSesion(3, conf.dLargo.min)
     }
     else{
-        confirmacion = window.confirm("Are you sure you want to interrump the current session?")
+        confirmacion = window.confirm("Are you sure you want to interrupt the current session?")
         if(confirmacion){
             clearInterval(intervalo)
             cambioSesion(3, conf.dLargo.min)
@@ -134,7 +134,7 @@ btnSesion.addEventListener('click', () => {
         cambioSesion(1, conf.pomodoro.min)
     }
     else{
-        confirmacion = window.confirm("Are you sure you want to interrump the current session?")
+        confirmacion = window.confirm("Are you sure you want to interrupt the current session?")
         if(confirmacion){
             clearInterval(intervalo)
             cambioSesion(1, conf.pomodoro.min)
