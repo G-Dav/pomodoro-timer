@@ -2,7 +2,10 @@ var conf = {
     pomodoro: {min: 25},
     dCorto: {min: 5},
     dLargo: {min: 15},
-    sesiones: 0
+    sesiones: 0,
+    automatic: false,   // indica si las sesiones se inician de forma automática
+    alarma: true,
+    volumen: 100
 }
 
 // Objeto tiempo que define el tiempo restante de una sesión
@@ -17,10 +20,12 @@ const btnReset = document.getElementById('reset')
 const btnSesion = document.getElementById('pomodoro')
 const btndCorto = document.getElementById('shortBreak')
 const btndLargo = document.getElementById('longBreak')
+const btnSave = document.getElementById('guardar')
 btnInicio.dataset.id = 1
 let intervalo = false   // indica si hay una sesión en curso, si la hay intervalo = setIterval()
 let tipoSesion = 1      // 1: pomodoro, 2: descanso corto, 3: descanso largo
 let confirmacion        // se utliza para indicar si el usuario elige interrumpir una sesión para iniciar otra
+let numSesiones = 2     // número de sesiones pomodoro que se han terminado antes de un descanso largo
 
 // Iniciar la cuenta regresiva al presionar el botón Start
 // Cambiar el estado del botón entre Start y Stop en cada click
@@ -39,18 +44,41 @@ btnInicio.addEventListener('click', () =>{
 
 // Función que realiza la cuenta regresiva
 const restarTiempo = () => {
-    tiempoPantalla.innerHTML = formatoTiempo(tiempoAux.min, tiempoAux.seg)
+    //tiempoPantalla.innerHTML = formatoTiempo(tiempoAux.min, tiempoAux.seg)
     if(tiempoAux.seg == 0){
         tiempoAux.min--
         if(tiempoAux.min < 0){
-            // detener la cuenta regresiva 
-            clearInterval(intervalo)
-            intervalo = false
+            if(!conf.automatic){
+                // detener la cuenta regresiva 
+                clearInterval(intervalo)
+                intervalo = false
+            }
             // Asignar el tiempo de la sesión siguiente según la sesión actual
             switch(tipoSesion){
                 case 1:
-                    tiempoAux.min = conf.dCorto.min
-                    tipoSesion = 2
+                    numSesiones++
+                    if(numSesiones >= conf.sesiones){
+                        tipoSesion = 3
+                        tiempoAux.min = conf.dLargo.min
+                        numSesiones = 0
+                    }else{
+                        tipoSesion = 2
+                        tiempoAux.min = conf.dCorto.min
+                    }
+                    /*
+                    if(conf.automatic){
+                        numSesiones++
+                        if(numSesiones >= conf.sesiones){
+                            tipoSesion = 3
+                            tiempoAux.min = conf.dLargo.min
+                        }else{
+                            tipoSesion = 2
+                            tiempoAux.min = conf.dCorto.min
+                        }
+                    }else{
+                        tipoSesion = 2
+                        tiempoAux.min = conf.dCorto.min
+                    }*/
                     break;
                 case 2:
                     tiempoAux.min = conf.pomodoro.min
@@ -62,7 +90,6 @@ const restarTiempo = () => {
                     break;
             }
             tiempoAux.seg = 0
-
             // Restablecer los valores del boton start
             resetBtnStart()
         }else{
@@ -71,6 +98,7 @@ const restarTiempo = () => {
     }else{
         tiempoAux.seg--
     }
+    tiempoPantalla.innerHTML = formatoTiempo(tiempoAux.min, tiempoAux.seg)
 }
 
 // Para mostrar el tiempo en el formato mm:ss
@@ -82,9 +110,15 @@ const formatoTiempo = (minutos, segundos) => {
 
 // Reiniciar el contador con el botón reset
 btnReset.addEventListener('click', () => {
+    resetear()
+    console.log(conf)
+})
+
+const resetear = () => {
     resetBtnStart()
     clearInterval(intervalo)
     intervalo = false
+    console.log(tipoSesion)
     switch(tipoSesion){
         case 1:
             tiempoAux.min = conf.pomodoro.min
@@ -98,7 +132,7 @@ btnReset.addEventListener('click', () => {
     }
     tiempoAux.seg = 0
     tiempoPantalla.innerHTML = formatoTiempo(tiempoAux.min, tiempoAux.seg)
-})
+}
 
 // Cambiar a descanso corto
 btndCorto.addEventListener('click', () => {
@@ -155,3 +189,15 @@ const resetBtnStart = () => {
     btnInicio.dataset.id = 1
     btnInicio.innerText = "Start"
 }
+
+// Modificar los valores de la variable conf según la elección del usuario
+btnSave.addEventListener('click', () => {
+    conf.pomodoro.min = document.config.tPomodoro.value
+    conf.dCorto.min = document.config.tShortBreak.value
+    conf.dLargo.min = document.config.tLongBreak.value
+    conf.sesiones = document.config.interval.value
+    conf.automatic = document.config.autostart.checked
+    conf.alarma = document.config.alarm.checked
+    conf.volumen = document.config.volume.value
+    resetear()
+})

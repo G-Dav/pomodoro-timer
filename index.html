@@ -59,33 +59,34 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form>
+                                        <form name="config">
                                             <label>Time (minutes)</label>
                                             <div class="container-fluid">
                                                 <div class="row">
                                                     <div class="col-xs-4">
                                                         Pomodoro
-                                                        <input type="number" min="0" value="25">
+                                                        <input name="tPomodoro" type="number" min="0" value="25">
                                                     </div>
                                                     <div class="col-xs-4">
                                                         Short break
-                                                        <input type="number" min="0" value="5">
+                                                        <input name="tShortBreak" type="number" min="0" value="5">
                                                     </div>
                                                     <div class="col-xs-4">
                                                         Long break
-                                                        <input type="number" min="0" value="15">
-                                                    </div>
-                                                </div>
+                                                        <input name="tLongBreak" type="number" min="0" value="15">
+                                                    </div>                                           
+                                                </div>                           
                                             </div>
+                                            <hr>
                                             <div class="container-fluid">
                                                 <div class="row">
                                                     <div class="col-xs-6">
                                                         Auto start?
-                                                        <input type="checkbox">
+                                                        <input name="autostart" type="checkbox">
                                                     </div>
                                                     <div class="col-xs-6">
                                                         Long break interval
-                                                        <input type="number" min="1" value="4">
+                                                        <input name="interval" type="number" min="1" value="4">
                                                     </div>
                                                 </div>
                                             </div>                                          
@@ -94,10 +95,10 @@
                                                 <div class="row">
                                                     <div class="col-xs-6">
                                                         Alarm
-                                                        <input type="checkbox"> 
+                                                        <input name="alarm" type="checkbox" checked> 
                                                     </div>
                                                     <div class="col-xs-6">
-                                                        <input type="range">
+                                                        <input name="volume" type="range">
                                                     </div>
                                                 </div>
                                             </div>                                                                                
@@ -105,7 +106,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save</button>
+                                        <button type="button" class="btn btn-primary" id="guardar">Save</button>
                                     </div>
                                 </div>
                             </div>
