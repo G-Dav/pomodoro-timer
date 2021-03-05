@@ -21,6 +21,10 @@ const btnSesion = document.getElementById('pomodoro')
 const btndCorto = document.getElementById('shortBreak')
 const btndLargo = document.getElementById('longBreak')
 const btnSave = document.getElementById('guardar')
+const btnAuto = document.querySelector('.auto')
+const checkAuto = document.config.autostart
+const btnAlarma = document.querySelector('.timbre')
+const checkAlarm = document.config.alarm
 btnInicio.dataset.id = 1
 let intervalo = false   // indica si hay una sesión en curso, si la hay intervalo = setIterval()
 let tipoSesion = 1      // 1: pomodoro, 2: descanso corto, 3: descanso largo
@@ -196,8 +200,24 @@ btnSave.addEventListener('click', () => {
     conf.dCorto.min = document.config.tShortBreak.value
     conf.dLargo.min = document.config.tLongBreak.value
     conf.sesiones = document.config.interval.value
-    conf.automatic = document.config.autostart.checked
-    conf.alarma = document.config.alarm.checked
+    conf.automatic = checkAuto.checked
+    conf.alarma = checkAlarm.checked
     conf.volumen = document.config.volume.value
     resetear()
+})
+
+btnAuto.addEventListener('click', () => {
+    document.config.autostart.click()
+})
+
+checkAuto.addEventListener('click', (e) => {
+    e.stopPropagation()
+})
+
+btnAlarma.addEventListener('click', () => {
+    document.config.alarm.click()
+})
+
+checkAlarm.addEventListener('click', (e) => {
+    e.stopPropagation()
 })
