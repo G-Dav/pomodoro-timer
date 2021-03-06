@@ -2,7 +2,7 @@ var conf = {
     pomodoro: {min: 25},
     dCorto: {min: 5},
     dLargo: {min: 15},
-    sesiones: 0,
+    sesiones: 4,        // número de sesiones de trabajo antes de un descanso largo
     automatic: false,   // indica si las sesiones se inician de forma automática
     alarma: true,
     volumen: 100
@@ -20,16 +20,30 @@ const btnReset = document.getElementById('reset')
 const btnSesion = document.getElementById('pomodoro')
 const btndCorto = document.getElementById('shortBreak')
 const btndLargo = document.getElementById('longBreak')
+const btnAjustes = document.getElementById('ajuste')
 const btnSave = document.getElementById('guardar')
 const btnAuto = document.querySelector('.auto')
 const checkAuto = document.config.autostart
 const btnAlarma = document.querySelector('.timbre')
 const checkAlarm = document.config.alarm
-btnInicio.dataset.id = 1
-let intervalo = false   // indica si hay una sesión en curso, si la hay intervalo = setIterval()
-let tipoSesion = 1      // 1: pomodoro, 2: descanso corto, 3: descanso largo
-let confirmacion        // se utliza para indicar si el usuario elige interrumpir una sesión para iniciar otra
-let numSesiones = 2     // número de sesiones pomodoro que se han terminado antes de un descanso largo
+btnInicio.dataset.id = 1    // 1: iniciar la cuenta regresiva, 2: detener la cuenta regresiva
+let intervalo = false       // indica si hay una sesión en curso, si la hay intervalo = setIterval()
+let tipoSesion = 1          // 1: pomodoro, 2: descanso corto, 3: descanso largo
+let confirmacion            // se utliza para indicar si el usuario elige interrumpir una sesión para iniciar otra
+let numSesiones = 0         // número de sesiones pomodoro que se han terminado antes de un descanso largo
+
+// Carga un sonido y lo interta en el DOM de forma oculta
+function cargarSonido(fuente) {
+    var elementoAudio = document.createElement("audio")
+    elementoAudio.src = fuente
+    elementoAudio.setAttribute("preload", "auto")
+    elementoAudio.setAttribute("controls", "none")
+    elementoAudio.style.display = "none"
+    document.body.appendChild(elementoAudio)
+    return elementoAudio
+}
+
+const sonido = cargarSonido("alarm.mp3")
 
 // Iniciar la cuenta regresiva al presionar el botón Start
 // Cambiar el estado del botón entre Start y Stop en cada click
@@ -48,10 +62,10 @@ btnInicio.addEventListener('click', () =>{
 
 // Función que realiza la cuenta regresiva
 const restarTiempo = () => {
-    //tiempoPantalla.innerHTML = formatoTiempo(tiempoAux.min, tiempoAux.seg)
     if(tiempoAux.seg == 0){
         tiempoAux.min--
         if(tiempoAux.min < 0){
+            sonido.play()
             if(!conf.automatic){
                 // detener la cuenta regresiva 
                 clearInterval(intervalo)
@@ -69,20 +83,6 @@ const restarTiempo = () => {
                         tipoSesion = 2
                         tiempoAux.min = conf.dCorto.min
                     }
-                    /*
-                    if(conf.automatic){
-                        numSesiones++
-                        if(numSesiones >= conf.sesiones){
-                            tipoSesion = 3
-                            tiempoAux.min = conf.dLargo.min
-                        }else{
-                            tipoSesion = 2
-                            tiempoAux.min = conf.dCorto.min
-                        }
-                    }else{
-                        tipoSesion = 2
-                        tiempoAux.min = conf.dCorto.min
-                    }*/
                     break;
                 case 2:
                     tiempoAux.min = conf.pomodoro.min
@@ -103,6 +103,9 @@ const restarTiempo = () => {
         tiempoAux.seg--
     }
     tiempoPantalla.innerHTML = formatoTiempo(tiempoAux.min, tiempoAux.seg)
+    if(ctx){
+        
+    }
 }
 
 // Para mostrar el tiempo en el formato mm:ss
@@ -204,6 +207,18 @@ btnSave.addEventListener('click', () => {
     conf.alarma = checkAlarm.checked
     conf.volumen = document.config.volume.value
     resetear()
+})
+
+// Al mostrar la ventana modal, los campos del fomulario deben tener como
+// valor los ajustes seleccionados por el usuario
+btnAjustes.addEventListener('click', () => {
+    document.config.tPomodoro.value = conf.pomodoro.min
+    document.config.tShortBreak.value = conf.dCorto.min
+    document.config.tLongBreak.value = conf.dLargo.min
+    document.config.interval.value = conf.sesiones
+    checkAuto.checked = conf.automatic
+    checkAlarm.checked = conf.alarma
+    document.config.volume.value = conf.volumen
 })
 
 btnAuto.addEventListener('click', () => {

@@ -45,7 +45,7 @@
                                 <button class="btn btn-block">Reset</button>
                             </div>
                             <div class="col-xs-4">
-                                <button class="btn btn-block" data-toggle="modal" data-target="#configuracion">Options</button>
+                                <button class="btn btn-block" id="ajuste" data-toggle="modal" data-target="#configuracion">Options</button>
                             </div>
                         </div>
                         <!--Ventana Modal-->
@@ -65,15 +65,15 @@
                                                 <div class="row">
                                                     <div class="col-xs-4">
                                                         Pomodoro
-                                                        <input name="tPomodoro" type="number" min="0" value="25">
+                                                        <input name="tPomodoro" type="number" min="1" value="25">
                                                     </div>
                                                     <div class="col-xs-4">
                                                         Short break
-                                                        <input name="tShortBreak" type="number" min="0" value="5">
+                                                        <input name="tShortBreak" type="number" min="1" value="5">
                                                     </div>
                                                     <div class="col-xs-4">
                                                         Long break
-                                                        <input name="tLongBreak" type="number" min="0" value="15">
+                                                        <input name="tLongBreak" type="number" min="1" value="15">
                                                     </div>                                           
                                                 </div>                           
                                             </div>
@@ -117,13 +117,16 @@
                         </div>
                     </div>
                     <!--Gráfico-->
-                    <div class="col-xs-12 col-sm-6" style="background-color: bisque;">
+                    <div class="col-xs-12 col-sm-6">
                         <div>
                             <center><h1 id="tiempo">25:00</h1></center>
                         </div>
                         <div>
                             <center>
-                                <canvas style="background-color: blue;"></canvas>
+                                <canvas style="background-color: bisque;" id="lienzo">
+                                    <!--Este texto se muestra para los navegadores no compatibles con canvas.<br> 
+			                        Por favor, utiliza un navegador compatible.-->
+                                </canvas>
                             </center>
                         </div>
                     </div>
