@@ -31,6 +31,7 @@ let intervalo = false       // indica si hay una sesión en curso, si la hay int
 let tipoSesion = 1          // 1: pomodoro, 2: descanso corto, 3: descanso largo
 let confirmacion            // se utliza para indicar si el usuario elige interrumpir una sesión para iniciar otra
 let numSesiones = 0         // número de sesiones pomodoro que se han terminado antes de un descanso largo
+let sonido
 const canvas = document.getElementById('lienzo')
 let ctx
 let totalSegundos
@@ -38,6 +39,7 @@ let incremento
 let angulo 
 
 window.addEventListener('load', () => {
+    sonido = cargarSonido("alarm.mp3")
     ctx = canvas.getContext("2d")
     calcularIncremento()
     //draw(angulo)
@@ -54,15 +56,27 @@ function draw(angulo) {
     ctx.fillStyle = "black"
     ctx.beginPath()
     ctx.moveTo(125, 125)
-    ctx.arc(125, 125, 115, 1.5*Math.PI, (1.5 + angulo)*Math.PI, false)
-    //ctx.fill();
-    ctx.closePath()
-    ctx.stroke()
+    ctx.arc(125, 125, 120, 0, 2*Math.PI, false)
+    ctx.fill();
+
+    ctx.fillStyle = "white"
+    ctx.beginPath()
+    ctx.moveTo(125, 125)
+    ctx.arc(125, 125, 110, 1.5*Math.PI, (1.5 + angulo)*Math.PI, false)
+    ctx.fill();
+
+    ctx.fillStyle = "black"
+    ctx.beginPath()
+    ctx.moveTo(125, 125)
+    ctx.arc(125, 125, 105, 0, 2*Math.PI, false)
+    ctx.fill();
+    //ctx.closePath()
+    //ctx.stroke()
 }  
 
 const dibujarTiempo = () => {
     //limpiarCanvas()
-    ctx.fillStyle = "black"
+    ctx.fillStyle = "white"
     ctx.font = "bold 40px sans-serif";
     ctx.fillText(formatoTiempo(tiempoAux.min, tiempoAux.seg),100,100);
 }
@@ -83,7 +97,7 @@ function cargarSonido(fuente) {
     return elementoAudio
 }
 
-const sonido = cargarSonido("alarm.mp3")
+//const sonido = cargarSonido("alarm.mp3")
 
 // Iniciar la cuenta regresiva al presionar el botón Start
 // Cambiar el estado del botón entre Start y Stop en cada click
