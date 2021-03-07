@@ -219,6 +219,8 @@ btndLargo.addEventListener('click', () => {
         if(confirmacion){
             clearInterval(intervalo)
             cambioSesion(3, conf.dLargo.min)
+            limpiarCanvas()
+            dibujarTiempo()
         }
     }
 })
@@ -233,6 +235,8 @@ btnSesion.addEventListener('click', () => {
         if(confirmacion){
             clearInterval(intervalo)
             cambioSesion(1, conf.pomodoro.min)
+            limpiarCanvas()
+            dibujarTiempo()
         }
     }
 })
