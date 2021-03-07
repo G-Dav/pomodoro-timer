@@ -31,6 +31,46 @@ let intervalo = false       // indica si hay una sesión en curso, si la hay int
 let tipoSesion = 1          // 1: pomodoro, 2: descanso corto, 3: descanso largo
 let confirmacion            // se utliza para indicar si el usuario elige interrumpir una sesión para iniciar otra
 let numSesiones = 0         // número de sesiones pomodoro que se han terminado antes de un descanso largo
+const canvas = document.getElementById('lienzo')
+let ctx
+let totalSegundos
+let incremento
+let angulo 
+
+window.addEventListener('load', () => {
+    ctx = canvas.getContext("2d")
+    calcularIncremento()
+    //draw(angulo)
+})
+
+function calcularIncremento() {
+    totalSegundos = tiempoAux.min*60
+    incremento = 2/totalSegundos
+    angulo = incremento
+}
+
+function draw(angulo) {
+    limpiarCanvas()
+    ctx.fillStyle = "black"
+    ctx.beginPath()
+    ctx.moveTo(125, 125)
+    ctx.arc(125, 125, 115, 1.5*Math.PI, (1.5 + angulo)*Math.PI, false)
+    //ctx.fill();
+    ctx.closePath()
+    ctx.stroke()
+}  
+
+const dibujarTiempo = () => {
+    //limpiarCanvas()
+    ctx.fillStyle = "black"
+    ctx.font = "bold 40px sans-serif";
+    ctx.fillText(formatoTiempo(tiempoAux.min, tiempoAux.seg),100,100);
+}
+
+const limpiarCanvas = () => {
+    ctx.fillStyle = "white"
+    ctx.fillRect(0, 0, 250, 250)
+}
 
 // Carga un sonido y lo interta en el DOM de forma oculta
 function cargarSonido(fuente) {
@@ -52,16 +92,17 @@ btnInicio.addEventListener('click', () =>{
         btnInicio.dataset.id = 2
         btnInicio.innerText = "Stop"
         intervalo = setInterval("restarTiempo()", 1000);
-        console.log("start"+intervalo)
+        //console.log("start"+intervalo)
     }else{
         resetBtnStart()
         clearInterval(intervalo)
-        console.log("stop"+intervalo)
+        //console.log("stop"+intervalo)
     }
 })
 
 // Función que realiza la cuenta regresiva
 const restarTiempo = () => {
+    //console.log(angulo)
     if(tiempoAux.seg == 0){
         tiempoAux.min--
         if(tiempoAux.min < 0){
@@ -96,6 +137,8 @@ const restarTiempo = () => {
             tiempoAux.seg = 0
             // Restablecer los valores del boton start
             resetBtnStart()
+            //limpiarCanvas()
+            calcularIncremento()
         }else{
             tiempoAux.seg = 59
         }
@@ -104,7 +147,14 @@ const restarTiempo = () => {
     }
     tiempoPantalla.innerHTML = formatoTiempo(tiempoAux.min, tiempoAux.seg)
     if(ctx){
+        if(intervalo!==false){
+            draw(angulo)
+            angulo += incremento
         
+        }else{
+            limpiarCanvas()
+        }
+        dibujarTiempo()
     }
 }
 
@@ -139,6 +189,8 @@ const resetear = () => {
     }
     tiempoAux.seg = 0
     tiempoPantalla.innerHTML = formatoTiempo(tiempoAux.min, tiempoAux.seg)
+    limpiarCanvas()
+    angulo = 0
 }
 
 // Cambiar a descanso corto
@@ -151,6 +203,8 @@ btndCorto.addEventListener('click', () => {
         if(confirmacion){
             clearInterval(intervalo)
             cambioSesion(2, conf.dCorto.min)
+            limpiarCanvas()
+            dibujarTiempo()
         }
     }
 })
@@ -189,6 +243,7 @@ const cambioSesion = (tSesion, min) => {
     tiempoAux.seg = 0
     tiempoPantalla.innerHTML = formatoTiempo(tiempoAux.min, tiempoAux.seg)
     intervalo = false
+    calcularIncremento()
     resetBtnStart()
 }
 
@@ -207,6 +262,7 @@ btnSave.addEventListener('click', () => {
     conf.alarma = checkAlarm.checked
     conf.volumen = document.config.volume.value
     resetear()
+    calcularIncremento()
 })
 
 // Al mostrar la ventana modal, los campos del fomulario deben tener como
