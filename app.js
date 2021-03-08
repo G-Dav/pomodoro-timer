@@ -150,9 +150,14 @@ const restarTiempo = () => {
             }
             tiempoAux.seg = 0
             // Restablecer los valores del boton start
-            resetBtnStart()
+            if(!intervalo){
+                resetBtnStart()
+            }
             //limpiarCanvas()
             calcularIncremento()
+            if(conf.automatic){
+                angulo = 0
+            }
         }else{
             tiempoAux.seg = 59
         }
@@ -164,7 +169,6 @@ const restarTiempo = () => {
         if(intervalo!==false){
             draw(angulo)
             angulo += incremento
-        
         }else{
             limpiarCanvas()
         }
