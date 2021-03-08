@@ -213,52 +213,41 @@ const resetear = () => {
 
 // Cambiar a descanso corto
 btndCorto.addEventListener('click', () => {
-    if(!intervalo){
-        cambioSesion(2, conf.dCorto.min)
-    }
-    else{
-        confirmacion = window.confirm("Are you sure you want to interrupt the current session?")
-        if(confirmacion){
-            clearInterval(intervalo)
-            cambioSesion(2, conf.dCorto.min)
-            limpiarCanvas()
-            dibujarTiempo()
-        }
-    }
+    revisarSesionActiva(2, conf.dCorto.min)
 })
 
 // Cambiar a descanso largo
 btndLargo.addEventListener('click', () => {
-    if(!intervalo){
-        cambioSesion(3, conf.dLargo.min)
-    }
-    else{
-        confirmacion = window.confirm("Are you sure you want to interrupt the current session?")
-        if(confirmacion){
-            clearInterval(intervalo)
-            cambioSesion(3, conf.dLargo.min)
-            limpiarCanvas()
-            dibujarTiempo()
-        }
-    }
+    revisarSesionActiva(3, conf.dLargo.min)
 })
 
 // Cambiar a sesión pomodoro
 btnSesion.addEventListener('click', () => {
+    revisarSesionActiva(1, conf.pomodoro.min)
+})
+
+// Revisar si hay una sesión activa cuando al intentar cambiar a otra 
+// Si la hay, se muestra una ventana donde el usuario debe confirmar o cancelar el cambio
+// Si se confirma el cambio se termina la sesión actual y se reinician los valores de tiempo
+// según el tipo de sesión seleccionado (1:pomodoro, 2:desc.corto, 3:desc.largo) 
+const revisarSesionActiva = (tSesion, mins) => {
+    // Si no hay una sesión activa, se hace el cambio de inmediato
     if(!intervalo){
-        cambioSesion(1, conf.pomodoro.min)
-    }
-    else{
+        cambioSesion(tSesion, mins)
+    }else{
+        // Si hay una sesión en curso, se solicita la confirmación del usuario
         confirmacion = window.confirm("Are you sure you want to interrupt the current session?")
+        // Si el usuario acepta, se hace el cambio y se reinician los valores
         if(confirmacion){
             clearInterval(intervalo)
-            cambioSesion(1, conf.pomodoro.min)
+            cambioSesion(tSesion, mins)
             limpiarCanvas()
             dibujarTiempo()
         }
     }
-})
+}
 
+// Termina con la sesión actual y reinicia los valores de tiempo 
 const cambioSesion = (tSesion, min) => {
     tipoSesion = tSesion
     tiempoAux.min = min
