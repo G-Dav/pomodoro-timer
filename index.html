@@ -102,7 +102,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-6">
-                                                        <input name="barraVol" type="range">
+                                                        <input name="barraVol" type="range" disabled="true">
                                                     </div>
                                                 </div>
                                             </div>                                                                                
@@ -136,10 +136,44 @@
         </div>
         <footer>
             <div class="col-xs-12 hidden-sm hidden-md hidden-lg" style="background-color:firebrick">
-                Info<br>Info  
+                <div class="col-xs-5" style="background-color:blue">
+                    <button class="btn"  data-toggle="modal" data-target="#creditos">Credits</button>
+                </div>
+                <div class="col-xs-2" style="background-color:rgb(0, 110, 255)">
+                    logo
+                </div>
+                <div class="col-xs-5" style="background-color:blue">
+                    <a href="">Enlace</a>
+                </div>
             </div>
             <div class="col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 navbar-fixed-bottom hidden-xs" style="background-color: darkcyan;">
-                Info<br>Info  
+                <div class="col-sm-5" style="background-color:blue">
+                    <button class="btn"  data-toggle="modal" data-target="#creditos">Credits</button>
+                </div>
+                <div class="col-sm-2" style="background-color:rgb(0, 110, 255)">
+                    logo
+                </div>
+                <div class="col-sm-5" style="background-color:blue">
+                    <a href="">Enlace</a>
+                </div>
+            </div>
+            <!--Ventana para los créditos-->
+            <div class="modal fade" tabindex="-1" id="creditos" role="dialog">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Credits</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        </div>
+                        <div class="modal-body">
+                            Logo: <a href="">Enlace 1</a><br>
+                            Sound: <a href="">Enlace 2</a>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </footer>
         <script src="http://code.jquery.com/jquery.js"></script>

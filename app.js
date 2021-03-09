@@ -320,9 +320,8 @@ const HabilitarRango = () => {
 }
 
 vol.addEventListener('change', (e) => {
-    //console.log("cambio: "+e.currentTarget.value)
+    // recuperar el valor seleccionado con e.currentTarget.value
     // volume acepta valores entre 0 y 1
     sonido.volume = e.currentTarget.value/100
-    //console.log("volumen: "+sonido.volume)
     sonido.play()
 })
