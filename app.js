@@ -1,7 +1,7 @@
 var conf = {
-    pomodoro: {min: 25},
-    dCorto: {min: 5},
-    dLargo: {min: 15},
+    pomodoro: 25,
+    dCorto: 5,
+    dLargo: 15,
     sesiones: 4,        // número de sesiones de trabajo antes de un descanso largo
     automatic: false,   // indica si las sesiones se inician de forma automática
     alarma: true,
@@ -13,7 +13,7 @@ let tiempoAux = {
     min: 25,
     seg: 0
 }
-
+pomodoro.min
 const tiempoPantalla = document.getElementById('tiempo')
 const btnInicio = document.getElementById('start')
 const btnReset = document.getElementById('reset')
@@ -26,6 +26,7 @@ const btnAuto = document.querySelector('.auto')
 const checkAuto = document.config.autostart
 const btnAlarma = document.querySelector('.timbre')
 const checkAlarm = document.config.alarm
+const vol = document.config.barraVol
 btnInicio.dataset.id = 1    // 1: iniciar la cuenta regresiva, 2: detener la cuenta regresiva
 let intervalo = false       // indica si hay una sesión en curso, si la hay intervalo = setIterval()
 let tipoSesion = 1          // 1: pomodoro, 2: descanso corto, 3: descanso largo
@@ -42,6 +43,7 @@ window.addEventListener('load', () => {
     sonido = cargarSonido("alarm.mp3")
     ctx = canvas.getContext("2d")
     calcularIncremento()
+    sonido.volume = 1
     //draw(angulo)
 })
 
@@ -97,8 +99,6 @@ function cargarSonido(fuente) {
     return elementoAudio
 }
 
-//const sonido = cargarSonido("alarm.mp3")
-
 // Iniciar la cuenta regresiva al presionar el botón Start
 // Cambiar el estado del botón entre Start y Stop en cada click
 btnInicio.addEventListener('click', () =>{
@@ -120,7 +120,9 @@ const restarTiempo = () => {
     if(tiempoAux.seg == 0){
         tiempoAux.min--
         if(tiempoAux.min < 0){
-            sonido.play()
+            if(conf.alarma){
+                sonido.play()
+            }
             if(!conf.automatic){
                 // detener la cuenta regresiva 
                 clearInterval(intervalo)
@@ -132,19 +134,19 @@ const restarTiempo = () => {
                     numSesiones++
                     if(numSesiones >= conf.sesiones){
                         tipoSesion = 3
-                        tiempoAux.min = conf.dLargo.min
+                        tiempoAux.min = conf.dLargo
                         numSesiones = 0
                     }else{
                         tipoSesion = 2
-                        tiempoAux.min = conf.dCorto.min
+                        tiempoAux.min = conf.dCorto
                     }
                     break;
                 case 2:
-                    tiempoAux.min = conf.pomodoro.min
+                    tiempoAux.min = conf.pomodoro
                     tipoSesion = 1
                     break;
                 case 3:
-                    tiempoAux.min = conf.pomodoro.min
+                    tiempoAux.min = conf.pomodoro
                     tipoSesion = 1
                     break;
             }
@@ -196,13 +198,13 @@ const resetear = () => {
     console.log(tipoSesion)
     switch(tipoSesion){
         case 1:
-            tiempoAux.min = conf.pomodoro.min
+            tiempoAux.min = conf.pomodoro
             break;
         case 2:
-            tiempoAux.min = conf.dCorto.min
+            tiempoAux.min = conf.dCorto
             break;
         case 3:
-            tiempoAux.min = conf.dLargo.min
+            tiempoAux.min = conf.dLargo
             break;
     }
     tiempoAux.seg = 0
@@ -213,17 +215,17 @@ const resetear = () => {
 
 // Cambiar a descanso corto
 btndCorto.addEventListener('click', () => {
-    revisarSesionActiva(2, conf.dCorto.min)
+    revisarSesionActiva(2, conf.dCorto)
 })
 
 // Cambiar a descanso largo
 btndLargo.addEventListener('click', () => {
-    revisarSesionActiva(3, conf.dLargo.min)
+    revisarSesionActiva(3, conf.dLargo)
 })
 
 // Cambiar a sesión pomodoro
 btnSesion.addEventListener('click', () => {
-    revisarSesionActiva(1, conf.pomodoro.min)
+    revisarSesionActiva(1, conf.pomodoro)
 })
 
 // Revisar si hay una sesión activa cuando al intentar cambiar a otra 
@@ -265,13 +267,13 @@ const resetBtnStart = () => {
 
 // Modificar los valores de la variable conf según la elección del usuario
 btnSave.addEventListener('click', () => {
-    conf.pomodoro.min = document.config.tPomodoro.value
-    conf.dCorto.min = document.config.tShortBreak.value
-    conf.dLargo.min = document.config.tLongBreak.value
+    conf.pomodoro = document.config.tPomodoro.value
+    conf.dCorto = document.config.tShortBreak.value
+    conf.dLargo = document.config.tLongBreak.value
     conf.sesiones = document.config.interval.value
     conf.automatic = checkAuto.checked
     conf.alarma = checkAlarm.checked
-    conf.volumen = document.config.volume.value
+    conf.volumen = document.config.barraVol.value
     resetear()
     calcularIncremento()
 })
@@ -279,15 +281,16 @@ btnSave.addEventListener('click', () => {
 // Al mostrar la ventana modal, los campos del fomulario deben tener como
 // valor los ajustes seleccionados por el usuario
 btnAjustes.addEventListener('click', () => {
-    document.config.tPomodoro.value = conf.pomodoro.min
-    document.config.tShortBreak.value = conf.dCorto.min
-    document.config.tLongBreak.value = conf.dLargo.min
+    document.config.tPomodoro.value = conf.pomodoro
+    document.config.tShortBreak.value = conf.dCorto
+    document.config.tLongBreak.value = conf.dLargo
     document.config.interval.value = conf.sesiones
     checkAuto.checked = conf.automatic
     checkAlarm.checked = conf.alarma
-    document.config.volume.value = conf.volumen
+    document.config.barraVol.value = conf.volumen
 })
 
+// Activar/desactivar de forma automática el inicio de una sesión
 btnAuto.addEventListener('click', () => {
     document.config.autostart.click()
 })
@@ -296,10 +299,30 @@ checkAuto.addEventListener('click', (e) => {
     e.stopPropagation()
 })
 
+// Activar/desactivar alarma
 btnAlarma.addEventListener('click', () => {
     document.config.alarm.click()
+    HabilitarRango()
 })
 
 checkAlarm.addEventListener('click', (e) => {
     e.stopPropagation()
+    HabilitarRango()
+})
+
+const HabilitarRango = () => {
+    // Si el campo de Alarma está seleccionado
+    if(checkAlarm.checked){
+        vol.disabled = false
+    }else{
+        vol.disabled = true
+    }
+}
+
+vol.addEventListener('change', (e) => {
+    //console.log("cambio: "+e.currentTarget.value)
+    // volume acepta valores entre 0 y 1
+    sonido.volume = e.currentTarget.value/100
+    //console.log("volumen: "+sonido.volume)
+    sonido.play()
 })
