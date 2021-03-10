@@ -1,28 +1,46 @@
 body{
-    background-color: #d15555;
-    margin-top: 15px;
+    background-color: #a13939;
+    margin-top: 10px;
+}
+
+header{
+    padding-top: 10px;
+    border-radius: 10px 10px;
 }
 
 header img{
     max-width: 70%;
 }
 
-hr{
-    margin: 15px;
-    /*background-color: #eda489;*/
-    border-top: 3px dashed bisque;
+/* Separador horizontal de la página principal*/
+hr.separador{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 0;
+    margin-right: 0;
+    border-top: 1px solid bisque;
 }
 
+/* Bloque principal de la página*/
 .timer{
-    background-color: #eda489;
-    border-radius: 5px 5px;
-    padding: 10px;
+    background-color: #ea907a;
+    border-radius: 7px 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 20px;
 }
 
 .boton{
-    /*background-color: transparent;*/
-    /*color: white;*/
-    margin: 1px;
+    background-color: transparent;
+    color: white;
+    border-radius: 5px 5px;
+    border: 2px solid bisque;
+}
+
+.boton:hover{
+    background-color: #c13131;
+    color: white;
+    transition: all 0.1s linear 0s;
 }
 
 .sesion{
@@ -33,4 +51,51 @@ hr{
 
 .row.sesion button{
     margin-bottom: 25px;
+}
+
+/* div con botones Start, Reset y Configuración*/
+.col-xs-12.hidden-md.hidden-lg{
+    margin-top: 10px;
+}
+
+.piePagina{
+    padding: 3px;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+}
+
+/* Enlaces*/
+.col-xs-5 a, .col-sm-5 a{
+    float: right;
+    color: white;
+}
+
+.info{
+    background-color: #ffe1a1;
+    border: 1px solid bisque;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.col-xs-5 button, .col-sm-5 button{
+    padding: 0;
+    background-color: transparent;
+    font-size: 15px;
+    color: white;
+}
+
+.col-xs-5 button:hover, .col-sm-5 button:hover{
+    padding: 0;
+    background-color: transparent;
+    font-size: 15px;
+    color: white;
+    text-decoration: underline;
+}
+
+.piePagina .separador{
+    margin-bottom: 5px;
+}
+
+.imgFooter{
+    width: 20px;
 }

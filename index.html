@@ -11,20 +11,23 @@
         <link rel="stylesheet" href="estilo.css" />
     </head>
     <body>
-        <div class="container" style="background-color: cadetblue;">
-            <div class="col-xs-12 col-sm-10 col-md-8 col-lg-8 col-sm-offset-1 col-md-offset-2 col-sm-offset-1" style="background-color: teal;">
+        <div class="container">
+            <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
                 <header class="row">
-                    <div class="col-xs-8 col-sm-9 col-md-6" style="background-color: cornflowerblue;">
+                    <div class="col-xs-8 col-sm-9 col-md-6">
                         <img src="img/Imagen3.png">
                     </div>
-                    <div class="col-xs-4 col-sm-3 col-md-4 col-lg-3 col-md-offset-2 col-lg-offset-3" style="background-color: coral;">
-                        <a href=#>Pomodoro technique</a>
+                    <div class="col-xs-4 col-sm-3 col-md-4 col-lg-3 col-md-offset-2 col-lg-offset-3 info">
+                        <center><a href=#>What is Pomodoro technique?</a></center>
                     </div>   
                 </header>
-                <hr>
+                <hr class="separador">
                 <div class="row timer">
+                    <div class="col-xs-12">
+                        <center><h1 id="tiempo">25:00</h1></center>
+                    </div>
                     <!--Tipos de intervalos-->
-                    <div class="col-xs-12 col-sm-12 col-md-6" style="position:relative;background-color: blueviolet;">
+                    <div class="col-xs-12 col-sm-12 col-md-6" style="padding:0;background-color: mblueviolet;">
                         <div class="row sesion">
                             <div class="col-xs-12 col-sm-4 col-md-12">
                                 <button class="btn boton btn-block" id="pomodoro">Pomodoro</button>
@@ -37,7 +40,8 @@
                             </div>
                         </div>
                         <!--Botones para iniciar/detener sesión-->
-                        <div class="row" style="background-color: aqua;">
+                        <!--<div class="row hidden-xs hidden-sm">-->
+                        <div class="col-md-12 hidden-xs hidden-sm">
                             <div class="col-xs-4">
                                 <button class="btn btn-block" id='start'>Start</button>
                             </div>
@@ -45,7 +49,9 @@
                                 <button class="btn btn-block">Reset</button>
                             </div>
                             <div class="col-xs-4">
-                                <button class="btn btn-block" id="ajuste" data-toggle="modal" data-target="#configuracion">Options</button>
+                                <button class="btn btn-block" id="ajuste" data-toggle="modal" data-target="#configuracion">
+                                    <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Config
+                                </button>
                             </div>
                         </div>
                         <!--Ventana Modal-->
@@ -102,7 +108,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-6">
-                                                        <input name="barraVol" type="range" disabled="true">
+                                                        <input name="barraVol" type="range" disabled="false">
                                                     </div>
                                                 </div>
                                             </div>                                                                                
@@ -119,42 +125,57 @@
                     <!--Gráfico-->
                     <div class="col-xs-12 col-sm-12 col-md-6">
                         <div>
-                            <center><h1 id="tiempo">25:00</h1></center>
-                        </div>
-                        <div>
                             <center>
-                                <canvas style="background-color: bisque;" id="lienzo" width="250" height="250">
-                                    <!--Este texto se muestra para los navegadores no compatibles con canvas.<br> 
-			                        Por favor, utiliza un navegador compatible.-->
+                                <canvas style="border: 2px solid bisque;" id="lienzo" width="250" height="250">
+                                    Este texto se muestra para los navegadores no compatibles con canvas.<br> 
+			                        Por favor, utiliza un navegador compatible.
                                 </canvas>
                             </center>
                         </div>
                     </div>
+                    <div class="col-xs-12 hidden-md hidden-lg">
+                        <div class="col-xs-4">
+                            <button class="btn btn-block" id='start'>Start</button>
+                        </div>
+                        <div class="col-xs-4" id="reset">
+                            <button class="btn btn-block">Reset</button>
+                        </div>
+                        <div class="col-xs-4">
+                            <button class="btn btn-block" id="ajuste" data-toggle="modal" data-target="#configuracion">
+                                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Config
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <hr>
             </div>
         </div>
         <footer>
-            <div class="col-xs-12 hidden-sm hidden-md hidden-lg" style="background-color:firebrick">
-                <div class="col-xs-5" style="background-color:blue">
-                    <button class="btn"  data-toggle="modal" data-target="#creditos">Credits</button>
+            <div class="piePagina col-xs-12 col-sm-10 col-sm-offset-1 hidden-md hidden-lg">
+                <hr class="separador">
+                <div class="col-xs-5">
+                    <button class="btn" data-toggle="modal" data-target="#creditos">Credits</button>
                 </div>
-                <div class="col-xs-2" style="background-color:rgb(0, 110, 255)">
-                    logo
+                <div class="col-xs-2">
+                    <center>
+                        <img src="img/Recurso1.png" class="imgFooter">
+                    </center>
                 </div>
-                <div class="col-xs-5" style="background-color:blue">
-                    <a href="">Enlace</a>
+                <div class="col-xs-5">
+                    <a href="https://github.com/G-Dav" target="blank">GitHub</a>
                 </div>
             </div>
-            <div class="col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 navbar-fixed-bottom hidden-xs" style="background-color: darkcyan;">
-                <div class="col-sm-5" style="background-color:blue">
-                    <button class="btn"  data-toggle="modal" data-target="#creditos">Credits</button>
+            <div class="piePagina col-md-8 col-md-offset-2 navbar-fixed-bottom hidden-xs hidden-sm">
+                <hr class="separador">
+                <div class="col-sm-5">
+                    <button class="btn" data-toggle="modal" data-target="#creditos">Credits</button>
                 </div>
-                <div class="col-sm-2" style="background-color:rgb(0, 110, 255)">
-                    logo
+                <div class="col-sm-2">
+                    <center>
+                        <img src="img/Recurso1.png" class="imgFooter">
+                    </center>
                 </div>
-                <div class="col-sm-5" style="background-color:blue">
-                    <a href="">Enlace</a>
+                <div class="col-sm-5">
+                    <a href="https://github.com/G-Dav" target="blank">GitHub</a>
                 </div>
             </div>
             <!--Ventana para los créditos-->
