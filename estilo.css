@@ -28,6 +28,7 @@ hr.separador{
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 20px;
+    border: 2px solid #761a1a;
 }
 
 .boton{
@@ -49,13 +50,32 @@ hr.separador{
     margin-left: 10px;
 }
 
+/*  Botones para sesion de trabajo, descanso corto y 
+    descanso largo */
 .row.sesion button{
     margin-bottom: 25px;
 }
 
-/* div con botones Start, Reset y Configuración*/
+/*  div con botones Start, Reset y Configuración en 
+    pantallas pequeñas*/
 .col-xs-12.hidden-md.hidden-lg{
     margin-top: 10px;
+}
+
+/*  Botones para iniciar/detener la sesion en tamaños 
+    de pantalla medianos o mayores*/
+.col-md-12.hidden-xs.hidden-sm div{
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+#start, #reset, #ajuste{
+    border: 1px solid #761a1a;
+}
+
+#start:hover, #reset:hover, #ajuste:hover{
+    border: 1px solid #761a1a;
+    color: #d15555;
 }
 
 .piePagina{
@@ -71,10 +91,13 @@ hr.separador{
 }
 
 .info{
-    background-color: #ffe1a1;
-    border: 1px solid bisque;
+    background-color: #ea907a;
     padding: 5px;
     border-radius: 5px;
+}
+
+.info a{
+    color: white;
 }
 
 .col-xs-5 button, .col-sm-5 button{
