@@ -55,34 +55,16 @@ function calcularIncremento() {
 
 function draw(angulo) {
     limpiarCanvas()
-
-    ctx.fillStyle = "black"
-    ctx.beginPath()
-    ctx.moveTo(125, 125)
-    ctx.arc(125, 125, 120, 0, 2*Math.PI, false)
-    ctx.fill();
-    //pintarParte("black", 0, 2*Math.PI)
-
-    ctx.fillStyle = "white"
-    ctx.beginPath()
-    ctx.moveTo(125, 125)
-    ctx.arc(125, 125, 110, 1.5*Math.PI, (1.5 + angulo)*Math.PI, false)
-    ctx.fill();
-
-    ctx.fillStyle = "black"
-    ctx.beginPath()
-    ctx.moveTo(125, 125)
-    ctx.arc(125, 125, 105, 0, 2*Math.PI, false)
-    ctx.fill();
-    //ctx.closePath()
-    //ctx.stroke()
+    pintarParte("#c13131", 120, 0, 2*Math.PI)
+    pintarParte("#fff279", 110, 1.5*Math.PI, (1.5 + angulo)*Math.PI)
+    pintarParte("#c13131", 100, 0, 2*Math.PI)
 }  
 
-const pintarParte = (color, angulo_inicio, angulo_fin) => {
+const pintarParte = (color, radio, angulo_inicio, angulo_fin) => {
     ctx.fillStyle = color
     ctx.beginPath()
     ctx.moveTo(125, 125)
-    ctx.arc(125, 125, 105, angulo_inicio, angulo_fin, false)
+    ctx.arc(125, 125, radio, angulo_inicio, angulo_fin, false)
     ctx.fill()
 }
 
