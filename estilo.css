@@ -56,17 +56,12 @@ hr.separador{
     margin-bottom: 25px;
 }
 
-/*  div con botones Start, Reset y Configuración en 
-    pantallas pequeñas*/
-.col-xs-12.hidden-md.hidden-lg{
-    margin-top: 10px;
-}
-
 /*  Botones para iniciar/detener la sesion en tamaños 
     de pantalla medianos o mayores*/
-.col-md-12.hidden-xs.hidden-sm div{
+.ajustes div{
     padding-right: 5px;
     padding-left: 5px;
+    margin-bottom: 15px;
 }
 
 #start, #reset, #ajuste{
