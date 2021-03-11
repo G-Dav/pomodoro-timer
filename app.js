@@ -44,7 +44,10 @@ window.addEventListener('load', () => {
     ctx = canvas.getContext("2d")
     calcularIncremento()
     sonido.volume = 1
-    //draw(angulo)
+    if(ctx){
+        pintarParte("#c13131", 120, 0, 2*Math.PI)
+    }
+    dibujarTiempo()
 })
 
 function calcularIncremento() {
@@ -54,10 +57,11 @@ function calcularIncremento() {
 }
 
 function draw(angulo) {
-    limpiarCanvas()
-    pintarParte("#c13131", 120, 0, 2*Math.PI)
-    pintarParte("#fff279", 110, 1.5*Math.PI, (1.5 + angulo)*Math.PI)
-    pintarParte("#c13131", 100, 0, 2*Math.PI)
+    if(ctx){
+        pintarParte("#c13131", 120, 0, 2*Math.PI)
+        pintarParte("#f8f398", 110, 1.5*Math.PI, (1.5 + angulo)*Math.PI)
+        pintarParte("#c13131", 100, 0, 2*Math.PI)        
+    }
 }  
 
 const pintarParte = (color, radio, angulo_inicio, angulo_fin) => {
@@ -69,15 +73,17 @@ const pintarParte = (color, radio, angulo_inicio, angulo_fin) => {
 }
 
 const dibujarTiempo = () => {
-    //limpiarCanvas()
-    ctx.fillStyle = "white"
-    ctx.font = "bold 40px sans-serif";
-    ctx.fillText(formatoTiempo(tiempoAux.min, tiempoAux.seg),100,100);
+    if(ctx){
+        ctx.fillStyle = "white"
+        ctx.font = "bold 40px sans-serif"
+        ctx.fillText(formatoTiempo(tiempoAux.min, tiempoAux.seg),100,100)
+    }
 }
 
 const limpiarCanvas = () => {
-    ctx.fillStyle = "white"
-    ctx.fillRect(0, 0, 250, 250)
+    if(ctx){
+        pintarParte("#c13131", 120, 0, 2*Math.PI)
+    }
 }
 
 // Carga un sonido y lo interta en el DOM de forma oculta
@@ -159,15 +165,13 @@ const restarTiempo = () => {
         tiempoAux.seg--
     }
     tiempoPantalla.innerHTML = formatoTiempo(tiempoAux.min, tiempoAux.seg)
-    if(ctx){
-        if(intervalo!==false){
-            draw(angulo)
-            angulo += incremento
-        }else{
-            limpiarCanvas()
-        }
-        dibujarTiempo()
+    if(intervalo!==false){
+        draw(angulo)
+        angulo += incremento
+    }else{
+        limpiarCanvas()
     }
+    dibujarTiempo()
 }
 
 // Para mostrar el tiempo en el formato mm:ss
@@ -202,12 +206,14 @@ const resetear = () => {
     tiempoAux.seg = 0
     tiempoPantalla.innerHTML = formatoTiempo(tiempoAux.min, tiempoAux.seg)
     limpiarCanvas()
+    dibujarTiempo()
     angulo = 0
 }
 
 // Cambiar a descanso corto
 btndCorto.addEventListener('click', () => {
     revisarSesionActiva(2, conf.dCorto)
+    
 })
 
 // Cambiar a descanso largo
@@ -228,6 +234,8 @@ const revisarSesionActiva = (tSesion, mins) => {
     // Si no hay una sesión activa, se hace el cambio de inmediato
     if(!intervalo){
         cambioSesion(tSesion, mins)
+        limpiarCanvas()
+        dibujarTiempo()
     }else{
         // Si hay una sesión en curso, se solicita la confirmación del usuario
         confirmacion = window.confirm("Are you sure you want to interrupt the current session?")

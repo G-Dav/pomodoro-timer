@@ -117,3 +117,8 @@ hr.separador{
 .imgFooter{
     width: 20px;
 }
+
+#lienzo{
+    border: 5px solid bisque;
+    border-radius: 50%;
+}
