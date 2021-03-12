@@ -27,6 +27,8 @@ const checkAuto = document.config.autostart
 const btnAlarma = document.querySelector('.timbre')
 const checkAlarm = document.config.alarm
 const vol = document.config.barraVol
+const divTimer = document.querySelector(".timer")
+const divInfo = document.querySelector(".info")
 btnInicio.dataset.id = 1    // 1: iniciar la cuenta regresiva, 2: detener la cuenta regresiva
 let intervalo = false       // indica si hay una sesión en curso, si la hay intervalo = setIterval()
 let tipoSesion = 1          // 1: pomodoro, 2: descanso corto, 3: descanso largo
@@ -38,15 +40,15 @@ let ctx
 let totalSegundos
 let incremento
 let angulo 
+let colorGrafico = "#c13131"
 
 window.addEventListener('load', () => {
     sonido = cargarSonido("alarm.mp3")
+    btnSesion.style.backgroundColor = "#c13131"
     ctx = canvas.getContext("2d")
     calcularIncremento()
     sonido.volume = 1
-    if(ctx){
-        pintarParte("#c13131", 120, 0, 2*Math.PI)
-    }
+    limpiarCanvas()
     dibujarTiempo()
 })
 
@@ -58,9 +60,9 @@ function calcularIncremento() {
 
 function draw(angulo) {
     if(ctx){
-        pintarParte("#c13131", 120, 0, 2*Math.PI)
+        pintarParte(colorGrafico, 120, 0, 2*Math.PI)
         pintarParte("#f8f398", 110, 1.5*Math.PI, (1.5 + angulo)*Math.PI)
-        pintarParte("#c13131", 100, 0, 2*Math.PI)        
+        pintarParte(colorGrafico, 100, 0, 2*Math.PI)        
     }
 }  
 
@@ -80,9 +82,10 @@ const dibujarTiempo = () => {
     }
 }
 
+// Dibujar el circulo vacío
 const limpiarCanvas = () => {
     if(ctx){
-        pintarParte("#c13131", 120, 0, 2*Math.PI)
+        pintarParte(colorGrafico, 120, 0, 2*Math.PI)
     }
 }
 
@@ -104,11 +107,11 @@ btnInicio.addEventListener('click', () =>{
         btnInicio.dataset.id = 2
         btnInicio.innerText = "Stop"
         intervalo = setInterval("restarTiempo()", 1000);
-        //console.log("start"+intervalo)
+        //console.log("start "+intervalo)
     }else{
         resetBtnStart()
         clearInterval(intervalo)
-        //console.log("stop"+intervalo)
+        //console.log("stop "+intervalo)
     }
 })
 
@@ -210,20 +213,109 @@ const resetear = () => {
     angulo = 0
 }
 
+const cambiarColor = (col1, col2, col3) => {
+    btnSesion.style.backgroundColor = col1
+    btndCorto.style.backgroundColor = col2
+    btndLargo.style.backgroundColor = col3
+}
+
+const colorearBotones = () => {
+    if(tipoSesion==1){
+        cambiarColor("#c13131", "transparent", "transparent")
+    }
+    if(tipoSesion==2){
+        cambiarColor("transparent", "#0d625e", "transparent")
+    }
+    if(tipoSesion==3){
+        cambiarColor("transparent", "transparent", "#0d625e")
+    }
+}
+
+const cambiarPaleta = tipoSesion => {
+    if(tipoSesion==1){
+        colorGrafico = "#c13131"
+        document.body.style.backgroundColor = "#a13939" // Color de fondo de la página
+        divTimer.style.backgroundColor = "#ea907a"
+        divTimer.style.border = "2px solid #761a1a"
+        divInfo.style.backgroundColor = "#ea907a"
+        btnInicio.style.border = "1px solid #8a1f1f"
+        btnReset.style.border = "1px solid #8a1f1f"
+        btnAjustes.style.border = "1px solid #8a1f1f"
+        // Color de texto en botones de inicio/reset
+        btnInicio.style.color = "#d15555"
+        btnReset.style.color = "#d15555"
+        btnAjustes.style.color = "#d15555"
+    }else{
+        colorGrafico = "#00a388"                        // Color del gráfico de progreso
+        document.body.style.backgroundColor = "#086972" // Color de fondo de la página
+        divTimer.style.backgroundColor = "#63b7af"
+        divTimer.style.border = "2px solid #0d625e"
+        divInfo.style.backgroundColor = "#63b7af"
+        btnInicio.style.border = "1px solid #0d625e"
+        btnReset.style.border = "1px solid #0d625e"
+        btnAjustes.style.border = "1px solid #0d625e"
+        // Color de texto en botones de inicio/reset
+        btnInicio.style.color = "#0d625e"
+        btnReset.style.color = "#0d625e"
+        btnAjustes.style.color = "#0d625e"
+    }
+}
+
 // Cambiar a descanso corto
 btndCorto.addEventListener('click', () => {
+    //cambiarPaleta(2)
     revisarSesionActiva(2, conf.dCorto)
-    
+    //colorearBotones("transparent", "#0d625e", "transparent")
+})
+
+btndCorto.addEventListener('mouseover', () => {
+    if(tipoSesion==2){
+        btndCorto.style.backgroundColor = "#0d625e"
+    }
+})
+
+btndCorto.addEventListener('mouseout', () => {
+    if(tipoSesion!=2){
+        btndCorto.style.backgroundColor = "transparent"
+    }
 })
 
 // Cambiar a descanso largo
 btndLargo.addEventListener('click', () => {
+    //cambiarPaleta(2)
     revisarSesionActiva(3, conf.dLargo)
+    //colorearBotones("transparent", "transparent", "#0d625e")
+})
+
+btndLargo.addEventListener('mouseover', () => {
+    if(tipoSesion==3){
+        btndLargo.style.backgroundColor = "#0d625e"
+    }
+})
+
+btndLargo.addEventListener('mouseout', () => {
+    if(tipoSesion!=3){
+        btndLargo.style.backgroundColor = "transparent"
+    }
 })
 
 // Cambiar a sesión pomodoro
 btnSesion.addEventListener('click', () => {
+    //cambiarPaleta(1)
     revisarSesionActiva(1, conf.pomodoro)
+    //colorearBotones("#c13131", "transparent", "transparent")
+})
+
+btnSesion.addEventListener('mouseover', () => {
+    if(tipoSesion==1){
+        btnSesion.style.backgroundColor = "#c13131"
+    }
+})
+
+btnSesion.addEventListener('mouseout', () => {
+    if(tipoSesion!=1){
+        btnSesion.style.backgroundColor = "transparent"
+    }
 })
 
 // Revisar si hay una sesión activa cuando al intentar cambiar a otra 
@@ -234,6 +326,8 @@ const revisarSesionActiva = (tSesion, mins) => {
     // Si no hay una sesión activa, se hace el cambio de inmediato
     if(!intervalo){
         cambioSesion(tSesion, mins)
+        cambiarPaleta(tSesion)
+        colorearBotones()
         limpiarCanvas()
         dibujarTiempo()
     }else{
@@ -243,6 +337,8 @@ const revisarSesionActiva = (tSesion, mins) => {
         if(confirmacion){
             clearInterval(intervalo)
             cambioSesion(tSesion, mins)
+            cambiarPaleta(tSesion)
+            colorearBotones()
             limpiarCanvas()
             dibujarTiempo()
         }

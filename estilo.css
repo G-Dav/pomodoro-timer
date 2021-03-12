@@ -1,6 +1,7 @@
 body{
     background-color: #a13939;
     margin-top: 10px;
+    transition: 0.5s;
 }
 
 header{
@@ -39,9 +40,12 @@ hr.separador{
 }
 
 .boton:hover{
-    background-color: #c13131;
     color: white;
     transition: all 0.1s linear 0s;
+}
+
+.boton:focus{
+    color: white;
 }
 
 .sesion{
@@ -65,13 +69,13 @@ hr.separador{
 }
 
 #start, #reset, #ajuste{
-    border: 1px solid #761a1a;
-}
-
-#start:hover, #reset:hover, #ajuste:hover{
-    border: 1px solid #761a1a;
+    border: 1px solid #8a1f1f;
     color: #d15555;
 }
+
+/*#start:hover, #reset:hover, #ajuste:hover{
+    color: #d15555;
+}*/
 
 .piePagina{
     padding: 3px;
@@ -119,6 +123,6 @@ hr.separador{
 }
 
 #lienzo{
-    border: 5px solid bisque;
+    border: 5px solid white;
     border-radius: 50%;
 }
