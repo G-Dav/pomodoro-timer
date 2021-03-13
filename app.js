@@ -77,8 +77,8 @@ const pintarParte = (color, radio, angulo_inicio, angulo_fin) => {
 const dibujarTiempo = () => {
     if(ctx){
         ctx.fillStyle = "white"
-        ctx.font = "bold 40px sans-serif"
-        ctx.fillText(formatoTiempo(tiempoAux.min, tiempoAux.seg),100,100)
+        ctx.font = "bold 60px 'Nunito'"
+        ctx.fillText(formatoTiempo(tiempoAux.min, tiempoAux.seg), 45, 140)
     }
 }
 
