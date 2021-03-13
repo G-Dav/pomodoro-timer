@@ -55,7 +55,7 @@ window.addEventListener('load', () => {
 function calcularIncremento() {
     totalSegundos = tiempoAux.min*60
     incremento = 2/totalSegundos
-    angulo = incremento
+    angulo = 0
 }
 
 function draw(angulo) {
@@ -151,6 +151,8 @@ const restarTiempo = () => {
                     tipoSesion = 1
                     break;
             }
+            cambiarPaleta(tipoSesion)
+            colorearBotones()
             tiempoAux.seg = 0
             // Restablecer los valores del boton start
             if(!intervalo){
@@ -168,9 +170,9 @@ const restarTiempo = () => {
         tiempoAux.seg--
     }
     tiempoPantalla.innerHTML = formatoTiempo(tiempoAux.min, tiempoAux.seg)
-    if(intervalo!==false){
-        draw(angulo)
+    if(intervalo!=false){
         angulo += incremento
+        draw(angulo)
     }else{
         limpiarCanvas()
     }
