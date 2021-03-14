@@ -41,6 +41,8 @@ let totalSegundos
 let incremento
 let angulo 
 let colorGrafico = "#c13131"
+let mensajeTitulo
+let comienzo = false
 
 window.addEventListener('load', () => {
     sonido = cargarSonido("alarm.mp3")
@@ -50,6 +52,7 @@ window.addEventListener('load', () => {
     sonido.volume = 1
     limpiarCanvas()
     dibujarTiempo()
+    mensajeTitulo = "Time to work!"
 })
 
 function calcularIncremento() {
@@ -121,6 +124,7 @@ const restarTiempo = () => {
     if(tiempoAux.seg == 0){
         tiempoAux.min--
         if(tiempoAux.min < 0){
+            angulo = 0
             if(conf.alarma){
                 sonido.play()
             }
@@ -128,6 +132,9 @@ const restarTiempo = () => {
                 // detener la cuenta regresiva 
                 clearInterval(intervalo)
                 intervalo = false
+            }else{
+                comienzo = true
+                console.log(comienzo)
             }
             // Asignar el tiempo de la sesión siguiente según la sesión actual
             switch(tipoSesion){
@@ -141,14 +148,17 @@ const restarTiempo = () => {
                         tipoSesion = 2
                         tiempoAux.min = conf.dCorto
                     }
+                    mensajeTitulo = "Time for a break"
                     break;
                 case 2:
                     tiempoAux.min = conf.pomodoro
                     tipoSesion = 1
+                    mensajeTitulo = "Time to work!"
                     break;
                 case 3:
                     tiempoAux.min = conf.pomodoro
                     tipoSesion = 1
+                    mensajeTitulo = "Time to work!"
                     break;
             }
             cambiarPaleta(tipoSesion)
@@ -160,23 +170,29 @@ const restarTiempo = () => {
             }
             //limpiarCanvas()
             calcularIncremento()
-            if(conf.automatic){
-                angulo = 0
-            }
         }else{
             tiempoAux.seg = 59
         }
     }else{
         tiempoAux.seg--
     }
-    tiempoPantalla.innerHTML = formatoTiempo(tiempoAux.min, tiempoAux.seg)
+    //tiempoPantalla.innerHTML = formatoTiempo(tiempoAux.min, tiempoAux.seg)
+    tiempoPantalla.innerHTML = mensajeTitulo
+    document.title = formatoTiempo(tiempoAux.min, tiempoAux.seg) + " - " + mensajeTitulo
+  
     if(intervalo!=false){
-        angulo += incremento
-        draw(angulo)
+        if(!comienzo){
+            angulo += incremento
+            draw(angulo)
+        }else{
+            console.log("aqui")
+            limpiarCanvas()
+        }
     }else{
         limpiarCanvas()
     }
     dibujarTiempo()
+    comienzo = false
 }
 
 // Para mostrar el tiempo en el formato mm:ss
@@ -189,14 +205,14 @@ const formatoTiempo = (minutos, segundos) => {
 // Reiniciar el contador con el botón reset
 btnReset.addEventListener('click', () => {
     resetear()
-    console.log(conf)
+    //console.log(conf)
 })
 
 const resetear = () => {
     resetBtnStart()
     clearInterval(intervalo)
     intervalo = false
-    console.log(tipoSesion)
+    //console.log(tipoSesion)
     switch(tipoSesion){
         case 1:
             tiempoAux.min = conf.pomodoro
@@ -209,7 +225,9 @@ const resetear = () => {
             break;
     }
     tiempoAux.seg = 0
-    tiempoPantalla.innerHTML = formatoTiempo(tiempoAux.min, tiempoAux.seg)
+    //tiempoPantalla.innerHTML = formatoTiempo(tiempoAux.min, tiempoAux.seg)
+    document.title = "Pomodoro Timer"
+    tiempoPantalla.innerHTML = mensajeTitulo
     limpiarCanvas()
     dibujarTiempo()
     angulo = 0
@@ -248,7 +266,7 @@ const cambiarPaleta = tipoSesion => {
         btnReset.style.color = "#d15555"
         btnAjustes.style.color = "#d15555"
     }else{
-        colorGrafico = "#00a388"                        // Color del gráfico de progreso
+        colorGrafico = "#0d625e"                        // Color del gráfico de progreso
         document.body.style.backgroundColor = "#086972" // Color de fondo de la página
         divTimer.style.backgroundColor = "#63b7af"
         divTimer.style.border = "2px solid #0d625e"
@@ -352,10 +370,17 @@ const cambioSesion = (tSesion, min) => {
     tipoSesion = tSesion
     tiempoAux.min = min
     tiempoAux.seg = 0
-    tiempoPantalla.innerHTML = formatoTiempo(tiempoAux.min, tiempoAux.seg)
+    //tiempoPantalla.innerHTML = formatoTiempo(tiempoAux.min, tiempoAux.seg)
+    document.title = "Pomodoro Timer"
     intervalo = false
     calcularIncremento()
     resetBtnStart()
+    if(tSesion==1){
+        mensajeTitulo = "Time to work!"
+    }else{
+        mensajeTitulo = "Time for a break"
+    }
+    tiempoPantalla.innerHTML = mensajeTitulo
 }
 
 const resetBtnStart = () => {

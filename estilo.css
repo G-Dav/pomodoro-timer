@@ -24,6 +24,7 @@ hr.separador{
 
 #tiempo {
     font-family: 'Nunito', sans-serif;
+    color: white;
 }
 
 /* Bloque principal de la página*/
@@ -77,10 +78,6 @@ hr.separador{
     color: #d15555;
 }
 
-/*#start:hover, #reset:hover, #ajuste:hover{
-    color: #d15555;
-}*/
-
 .piePagina{
     padding: 3px;
     border-top-left-radius: 7px;
@@ -127,6 +124,6 @@ hr.separador{
 }
 
 #lienzo{
-    border: 5px solid white;
+    border: 7px solid white;
     border-radius: 50%;
 }
