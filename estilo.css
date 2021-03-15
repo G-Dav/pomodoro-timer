@@ -127,3 +127,58 @@ hr.separador{
     border: 7px solid white;
     border-radius: 50%;
 }
+
+/* Estilos de las ventanas de configuración y créditos */
+.modal-header{
+    background-color: #d15555;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+h3.modal-title{
+    display:inline;
+    color: white;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 5px;
+    border: 2px solid #b1b1b1;
+    border-radius: 5px;
+}
+	
+/* Estilo para los checkbox de Alarma e Inicio automático */
+input[type="checkbox"] + label:before {
+	content: "";
+	width: 26px;
+	height: 26px;
+	float: left;
+	margin: 0.5em 0.5em 0 0;
+	border: 2px solid #ccc;
+}
+
+input[type="checkbox"]:checked + label:before {
+	border-color: #d15555;
+}
+
+/* Palomita */
+input[type="checkbox"]:checked + label:after {
+    content: "";
+    width: 14px;
+    height: 8px;
+    border: 4px solid #8a1f1f;
+    float: left;
+    margin-left: -1.95em;
+    border-right: 0;
+    border-top: 0;
+    margin-top: 1em;
+    transform: rotate(-55deg);
+}
+
+input[type="checkbox"] {
+	display: none;
+}
+
+input[type="checkbox"] + label {
+    line-height: 3em;
+}

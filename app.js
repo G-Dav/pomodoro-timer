@@ -132,6 +132,7 @@ const restarTiempo = () => {
                 // detener la cuenta regresiva 
                 clearInterval(intervalo)
                 intervalo = false
+
             }else{
                 comienzo = true
                 console.log(comienzo)
@@ -181,11 +182,12 @@ const restarTiempo = () => {
     document.title = formatoTiempo(tiempoAux.min, tiempoAux.seg) + " - " + mensajeTitulo
   
     if(intervalo!=false){
+        // El primer segundo de un intervalo no se toma en cuenta para dibujar el progreso
+        // cuando el inicio es automático 
         if(!comienzo){
             angulo += incremento
             draw(angulo)
         }else{
-            console.log("aqui")
             limpiarCanvas()
         }
     }else{
