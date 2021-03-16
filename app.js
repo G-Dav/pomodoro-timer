@@ -427,6 +427,7 @@ checkAuto.addEventListener('click', (e) => {
 // Activar/desactivar alarma
 btnAlarma.addEventListener('click', () => {
     document.config.alarm.click()
+    console.log(checkAlarm.checked)
     HabilitarRango()
 })
 

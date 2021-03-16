@@ -107,12 +107,18 @@ hr.separador{
     color: white;
 }
 
-.col-xs-5 button:hover, .col-sm-5 button:hover{
+.col-xs-5 button:hover, .col-xs-5 button:active,
+.col-sm-5 button:hover, .col-sm-5 button:active{
     padding: 0;
     background-color: transparent;
     font-size: 15px;
     color: white;
     text-decoration: underline;
+}
+
+.col-xs-5 button:focus, .col-sm-5 button:focus{
+    text-decoration: none;
+    color: white;
 }
 
 .piePagina .separador{
@@ -181,4 +187,16 @@ input[type="checkbox"] {
 
 input[type="checkbox"] + label {
     line-height: 3em;
+}
+
+/* Estilo para los créditos */
+ul{
+    list-style: none;
+}
+  
+ul li:before {
+    content: "\1F789";  /* Código unicode de la viñeta */
+    color: #d15555;
+    display: inline;
+    margin-left: -1.5em; /* Also needed for space (tweak if needed) */
 }
