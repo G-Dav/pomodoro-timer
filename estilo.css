@@ -198,5 +198,5 @@ ul li:before {
     content: "\1F789";  /* Código unicode de la viñeta */
     color: #d15555;
     display: inline;
-    margin-left: -1.5em; /* Also needed for space (tweak if needed) */
+    margin-left: -1.5em;
 }
