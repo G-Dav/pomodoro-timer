@@ -10,7 +10,8 @@ header{
 }
 
 header img{
-    max-width: 70%;
+    /*max-width: 70%;*/
+    max-height: 14vh;
 }
 
 /* Separador horizontal de la página principal*/
