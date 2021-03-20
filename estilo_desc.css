@@ -1,3 +1,13 @@
 p{
     text-align: justify;
+    font-size: 1.3em;
+    color: white;
+}
+
+section.row.show-grid{
+    padding: 35px;
+    padding-bottom: 0px;
+    background-color: #ea907a;
+    border-radius: 7px 7px;
+    border: 2px solid #761a1a;
 }
