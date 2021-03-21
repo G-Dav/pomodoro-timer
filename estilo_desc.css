@@ -4,10 +4,27 @@ p{
     color: white;
 }
 
-section.row.show-grid{
+section.row{
     padding: 35px;
-    padding-bottom: 0px;
     background-color: #ea907a;
     border-radius: 7px 7px;
     border: 2px solid #761a1a;
+}
+
+.paso{
+    background-color: #c13131;
+    padding: 2px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.2em;
+    border: 2px solid bisque;
+    text-align: center;
+}
+
+.renglon{
+    margin-bottom: 15px;
+    color:white;
+    font-size: 1.1em;
 }
