@@ -8,7 +8,12 @@ section.row{
     padding: 35px;
     background-color: #ea907a;
     border-radius: 7px 7px;
-    border: 2px solid #761a1a;
+    border: 2px solid bisque;
+}
+
+.col-xs-6.col-sm-3.col-md-3.col-lg-2.col-md-offset-1.col-lg-offset-2{
+    margin-top: 3px;
+    padding-left:0;
 }
 
 .paso{
@@ -24,7 +29,21 @@ section.row{
 }
 
 .renglon{
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     color:white;
     font-size: 1.1em;
+}
+
+.renglon img{
+    height: 100px;
+    margin: 10px;
+}
+
+#ventanaIdioma a{
+    color: rgb(58, 58, 58);
+}
+
+#ventanaIdioma a:hover{
+    color: #ea907a;
+    text-decoration: none;
 }

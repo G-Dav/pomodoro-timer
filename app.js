@@ -258,7 +258,6 @@ const cambiarPaleta = tipoSesion => {
         colorGrafico = "#c13131"
         document.body.style.backgroundColor = "#a13939" // Color de fondo de la página
         divTimer.style.backgroundColor = "#ea907a"
-        divTimer.style.border = "2px solid #761a1a"
         divInfo.style.backgroundColor = "#ea907a"
         btnInicio.style.border = "1px solid #8a1f1f"
         btnReset.style.border = "1px solid #8a1f1f"
@@ -266,12 +265,11 @@ const cambiarPaleta = tipoSesion => {
         // Color de texto en botones de inicio/reset
         btnInicio.style.color = "#d15555"
         btnReset.style.color = "#d15555"
-        btnAjustes.style.color = "#d15555"
+        btnAjustes.style.color = "#d15555"   
     }else{
         colorGrafico = "#0d625e"                        // Color del gráfico de progreso
         document.body.style.backgroundColor = "#086972" // Color de fondo de la página
         divTimer.style.backgroundColor = "#63b7af"
-        divTimer.style.border = "2px solid #0d625e"
         divInfo.style.backgroundColor = "#63b7af"
         btnInicio.style.border = "1px solid #0d625e"
         btnReset.style.border = "1px solid #0d625e"
@@ -281,62 +279,68 @@ const cambiarPaleta = tipoSesion => {
         btnReset.style.color = "#0d625e"
         btnAjustes.style.color = "#0d625e"
     }
+    btnSesion.style.border = "2px solid white"
+    btndCorto.style.border = "2px solid white"
+    btndLargo.style.border = "2px solid white"
 }
 
 // Cambiar a descanso corto
 btndCorto.addEventListener('click', () => {
-    //cambiarPaleta(2)
     revisarSesionActiva(2, conf.dCorto)
-    //colorearBotones("transparent", "#0d625e", "transparent")
 })
 
 btndCorto.addEventListener('mouseover', () => {
-    if(tipoSesion==2){
-        btndCorto.style.backgroundColor = "#0d625e"
+    if(tipoSesion==1){
+        btndCorto.style.border = "2px solid #c13131"
+    }
+    if(tipoSesion==3){
+        btndCorto.style.border = "2px solid #0d625e"
     }
 })
 
 btndCorto.addEventListener('mouseout', () => {
     if(tipoSesion!=2){
         btndCorto.style.backgroundColor = "transparent"
+        btndCorto.style.border = "2px solid white"
     }
 })
 
 // Cambiar a descanso largo
 btndLargo.addEventListener('click', () => {
-    //cambiarPaleta(2)
     revisarSesionActiva(3, conf.dLargo)
-    //colorearBotones("transparent", "transparent", "#0d625e")
 })
 
 btndLargo.addEventListener('mouseover', () => {
-    if(tipoSesion==3){
-        btndLargo.style.backgroundColor = "#0d625e"
+    if(tipoSesion==1){
+        btndLargo.style.border = "2px solid #c13131"
+    }
+    if(tipoSesion==2){
+        btndLargo.style.border = "2px solid #0d625e"
     }
 })
 
 btndLargo.addEventListener('mouseout', () => {
     if(tipoSesion!=3){
         btndLargo.style.backgroundColor = "transparent"
+        btndLargo.style.border = "2px solid white"
     }
 })
 
 // Cambiar a sesión pomodoro
 btnSesion.addEventListener('click', () => {
-    //cambiarPaleta(1)
     revisarSesionActiva(1, conf.pomodoro)
-    //colorearBotones("#c13131", "transparent", "transparent")
 })
 
 btnSesion.addEventListener('mouseover', () => {
-    if(tipoSesion==1){
-        btnSesion.style.backgroundColor = "#c13131"
+    if(tipoSesion!=1){
+        btnSesion.style.border = "2px solid #0d625e"
     }
 })
 
 btnSesion.addEventListener('mouseout', () => {
     if(tipoSesion!=1){
         btnSesion.style.backgroundColor = "transparent"
+        btnSesion.style.border = "2px solid white"
     }
 })
 
