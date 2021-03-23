@@ -13,7 +13,6 @@ let tiempoAux = {
     min: 25,
     seg: 0
 }
-pomodoro.min
 const tiempoPantalla = document.getElementById('tiempo')
 const btnInicio = document.getElementById('start')
 const btnReset = document.getElementById('reset')
