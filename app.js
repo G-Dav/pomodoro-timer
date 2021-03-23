@@ -177,7 +177,6 @@ const restarTiempo = () => {
     }else{
         tiempoAux.seg--
     }
-    //tiempoPantalla.innerHTML = formatoTiempo(tiempoAux.min, tiempoAux.seg)
     tiempoPantalla.innerHTML = mensajeTitulo
     document.title = formatoTiempo(tiempoAux.min, tiempoAux.seg) + " - " + mensajeTitulo
   
@@ -227,7 +226,6 @@ const resetear = () => {
             break;
     }
     tiempoAux.seg = 0
-    //tiempoPantalla.innerHTML = formatoTiempo(tiempoAux.min, tiempoAux.seg)
     document.title = "Pomodoro Timer"
     tiempoPantalla.innerHTML = mensajeTitulo
     limpiarCanvas()
