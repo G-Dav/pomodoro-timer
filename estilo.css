@@ -54,6 +54,14 @@ hr.separador {
     color: white;
 }
 
+.btn:active{
+    outline: none !important;
+}
+
+.btn:focus {
+    outline: none;
+}
+
 .sesion {
     margin-top: 25px;
     margin-right: 10px;
