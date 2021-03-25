@@ -170,7 +170,7 @@ input[type="number"]:focus {
 }
 	
 /* Estilo para los checkbox de Alarma e Inicio automático */
-input[type="checkbox"] + label:before {
+input[type="checkbox"] + label::before {
 	content: "";
 	width: 26px;
 	height: 26px;
@@ -179,12 +179,12 @@ input[type="checkbox"] + label:before {
 	border: 2px solid #ccc;
 }
 
-input[type="checkbox"]:checked + label:before {
+input[type="checkbox"]:checked + label::before {
 	border-color: #d15555;
 }
 
 /* Palomita */
-input[type="checkbox"]:checked + label:after {
+input[type="checkbox"]:checked + label::after {
     content: "";
     width: 14px;
     height: 8px;
@@ -210,7 +210,7 @@ ul {
     list-style: none;
 }
   
-ul li:before {
+ul li::before {
     content: "\1F789";  /* Código unicode de la viñeta */
     color: #d15555;
     display: inline;
